@@ -1,9 +1,9 @@
 name: Deploy Project
 on:
+  workflow_dispatch: 
   push:
     branches: 
       - feature/practice-github-actions
-  workflow_dispatch: 
 jobs:
   test:
     runs-on: ubuntu-latest
