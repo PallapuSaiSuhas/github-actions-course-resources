@@ -19,6 +19,7 @@ jobs:
         working-directory: Code/02 Basics/02 Starting Project
       - name: Run project
         run: npm run dev
+        working-directory: Code/02 Basics/02 Starting Project
       - name: Run tests
         run: npm test
         working-directory: Code/02 Basics/02 Starting Project
