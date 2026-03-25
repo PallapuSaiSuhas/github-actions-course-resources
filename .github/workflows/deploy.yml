@@ -1,0 +1,43 @@
+name: Deploy Website
+on:
+  push:
+    branches:
+      - feature/practice-github-actions
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+        working-directory: Code/02 Basics/02 Starting Project
+      - name: Lint code
+        run: npm run lint
+        working-directory: Code/02 Basics/02 Starting Project
+      - name: Test code
+        run: npm run test
+        working-directory: Code/02 Basics/02 Starting Project
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+        working-directory: Code/02 Basics/02 Starting Project
+      - name: Build website
+        run: npm run build
+        working-directory: Code/02 Basics/02 Starting Project
+      - name: upload artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: artifacts
+          path: artifacts
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        run: echo "Deploying..."
